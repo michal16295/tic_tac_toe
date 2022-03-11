@@ -1,11 +1,3 @@
-export class Board {
-  position = [
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
-  ];
-}
-
 export interface StepRequest {
   id: number;
   i: number;
