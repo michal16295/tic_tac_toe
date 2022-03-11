@@ -11,7 +11,7 @@ class GameService {
   }
 
   private _players: Player[] = [];
-  private _boards: Map<number, Board> = new Map();
+  private _boards: Map<string, Board> = new Map();
 
   private checkWiner(board: Board, fig: "X" | "O"): boolean {
     const arr = [0, 0, 0];
@@ -46,15 +46,15 @@ class GameService {
     return steps[Math.floor(Math.random() * steps.length)];
   }
 
-  addPlayer(player: Player): number {
-    if ((player?.name || "").trim() === "") return 0;
+  addPlayer(player: Player): string {
+    if ((player?.name || "").trim() === "") return undefined;
 
-    const id = new Date().valueOf();
+    const id = new Date().valueOf().toString();
     this._players.push({ ...player, id: id, score: 0 });
     return id;
   }
 
-  deletePlayer(id: number): void {
+  deletePlayer(id: string): void {
     this._players = this._players.filter((x) => x.id !== id);
   }
 
@@ -62,11 +62,11 @@ class GameService {
     return this._players;
   }
 
-  getPlayer(id: number): Player {
+  getPlayer(id: string): Player {
     return this._players.find((x) => x.id === id);
   }
 
-  newGame(id: number): Board {
+  newGame(id: string): Board {
     if (!this.getPlayer(id)) return undefined;
 
     this._boards.set(id, new Board());

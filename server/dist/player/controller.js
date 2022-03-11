@@ -17,12 +17,22 @@ const createUser = (req, res) => {
 const getUsers = (req, res) => {
     try {
         console.log(`Get all users`);
-        res.json({ id: service_1.default.instance.getPlayers() });
+        res.json(service_1.default.instance.getPlayers());
     }
     catch (e) {
         console.log(e);
         res.status(500);
     }
 };
-exports.default = { createUser, getUsers };
+const getUser = (req, res) => {
+    try {
+        console.log(`Get user id: ${req.params.id}`);
+        res.json(service_1.default.instance.getPlayer(req.params.id));
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500);
+    }
+};
+exports.default = { createUser, getUsers, getUser };
 //# sourceMappingURL=controller.js.map

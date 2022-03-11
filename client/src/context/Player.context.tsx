@@ -40,9 +40,29 @@ export const PlayerProvider = ({
       .finally(() => setLoading(false));
   };
 
+  const getCurrentPlayerData = (id: number) => {
+    setLoading(true);
+    playerApi
+      .getPlayer(id)
+      .then((res) => {
+        console.log(res);
+        setPlayer(res);
+      })
+      .catch((newError) => setError(newError))
+      .finally(() => setLoading(false));
+  };
+
   return (
     <PlayerContext.Provider
-      value={{ createPlayer, getPlayers, player, players, loading, error }}
+      value={{
+        createPlayer,
+        getPlayers,
+        getCurrentPlayerData,
+        player,
+        players,
+        loading,
+        error,
+      }}
     >
       {children}
     </PlayerContext.Provider>

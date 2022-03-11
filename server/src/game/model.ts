@@ -7,7 +7,7 @@ export class Board {
 }
 
 export interface StepRequest {
-  id: number;
+  id: string;
   i: number;
   j: number;
 }

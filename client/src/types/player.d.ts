@@ -11,4 +11,5 @@ export interface PlayerContextType {
   error?: string;
   createPlayer: (name: string) => void;
   getPlayers: () => void;
+  getCurrentPlayerData: (id: number) => void;
 }

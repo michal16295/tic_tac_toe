@@ -48,8 +48,8 @@ class GameService {
     }
     addPlayer(player) {
         if (((player === null || player === void 0 ? void 0 : player.name) || "").trim() === "")
-            return 0;
-        const id = new Date().valueOf();
+            return undefined;
+        const id = new Date().valueOf().toString();
         this._players.push(Object.assign(Object.assign({}, player), { id: id, score: 0 }));
         return id;
     }

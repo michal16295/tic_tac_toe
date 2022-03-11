@@ -1,5 +1,5 @@
 import httpService from "./httpService";
-import routes from "./routes.json";
+import routes from "./routes";
 
 export const newGame = async (id: number): Promise<any> => {
   try {
