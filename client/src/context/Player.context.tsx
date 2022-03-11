@@ -1,15 +1,21 @@
-import React, { createContext, ReactNode, useState } from "react";
-
+import React, { createContext, ReactNode, useContext, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as playerApi from "../apis/player";
 import { Player, PlayerContextType } from "../types/player";
+import routes from "../routes.json";
 
-export const PlayerContext = createContext<PlayerContextType | null>(null);
+const PlayerContext = createContext<PlayerContextType>({} as PlayerContextType);
 
-const PlayerProvider = ({ children }: { children: ReactNode }): JSX.Element => {
+export const PlayerProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
   const [player, setPlayer] = useState<Player>();
   const [players, setPlayers] = useState<Array<Player>>([]);
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const createPlayer = (name: string) => {
     setLoading(true);
@@ -17,6 +23,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }): JSX.Element => {
       .createPlayer(name)
       .then((newUser) => {
         setPlayer(newUser);
+        navigate(routes.GAME);
       })
       .catch((newError) => setError(newError))
       .finally(() => setLoading(false));
@@ -42,4 +49,6 @@ const PlayerProvider = ({ children }: { children: ReactNode }): JSX.Element => {
   );
 };
 
-export default PlayerProvider;
+export default function useAuth(): PlayerContextType {
+  return useContext(PlayerContext);
+}

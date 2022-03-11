@@ -5,7 +5,7 @@ export interface StepRequest {
 }
 
 export interface IBoard {
-  positions: Array<any>;
+  position: Array<any>;
 }
 
 export enum Winner {

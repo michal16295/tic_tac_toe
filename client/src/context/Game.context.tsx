@@ -1,11 +1,15 @@
-import React, { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode, useState, useContext } from "react";
 
 import * as gameApi from "../apis/game";
 import { IBoard, GameContextType } from "../types/game";
 
-export const GameContext = createContext<GameContextType | null>(null);
+const GameContext = createContext<GameContextType>({} as GameContextType);
 
-const GameProvider = ({ children }: { children: ReactNode }): JSX.Element => {
+export const GameProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
   const [board, setBoard] = useState<IBoard>();
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,4 +32,6 @@ const GameProvider = ({ children }: { children: ReactNode }): JSX.Element => {
   );
 };
 
-export default GameProvider;
+export default function useAuth(): GameContextType {
+  return useContext(GameContext);
+}

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { createPlayer } from "../apis/player";
+import usePlayer from "../context/Player.context";
 
 const OnBoarding = () => {
+  const { createPlayer, player } = usePlayer();
   const [name, setName] = useState<string>("");
   return (
     <Container>
@@ -10,9 +11,7 @@ const OnBoarding = () => {
 
       <Input
         placeholder="Enter your nickname"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setName(e.target.value)
-        }
+        onChange={(e: any) => setName(e.target.value)}
       />
       <Button onClick={() => createPlayer(name)}>Continue</Button>
     </Container>

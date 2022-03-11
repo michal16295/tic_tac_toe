@@ -5,7 +5,8 @@ import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 import OnBoarding from "./screens/OnBoarding";
-import PlayerProvider from "./context/Player.context";
+import { PlayerProvider } from "./context/Player.context";
+import { GameProvider } from "./context/Game.context";
 import Game from "./screens/Game";
 import routes from "./routes.json";
 import "./App.css";
@@ -22,11 +23,13 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      <PlayerProvider>
-        <Router>
-          <Routes>{publicRoutes}</Routes>
-        </Router>
-      </PlayerProvider>
+      <Router>
+        <PlayerProvider>
+          <GameProvider>
+            <Routes>{publicRoutes}</Routes>
+          </GameProvider>
+        </PlayerProvider>
+      </Router>
     </ErrorBoundary>
   );
 };

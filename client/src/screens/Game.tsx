@@ -1,24 +1,52 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import useGameData from "../hooks/useGameData";
+import usePlayer from "../context/Player.context";
+import useGame from "../context/Game.context";
+
+import routes from "../routes.json";
+
+interface IProps {
+  draw?: boolean;
+  last?: boolean;
+}
 
 const Game = () => {
-  const { board, loading } = useGameData(1646996436940);
-  console.log(board);
+  const { player } = usePlayer();
+  const { newGame, loading, board } = useGame();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (player) {
+      newGame(player.id);
+    } else {
+      navigate(routes.ON_BOARDING);
+    }
+  }, []);
+
   return (
     <Container>
       {loading ? (
         <div>Loading...</div>
       ) : (
         <Board>
-          {board &&
-            board.positions.map((row: any, i: number) => (
-              <div key={i}>
-                {row.map((col: string, j: number) => (
-                  <span key={j}>{col}</span>
-                ))}
-              </div>
-            ))}
+          {board?.position?.map((p: string[], i: number) => {
+            return (
+              <Row key={i}>
+                {p.map((c: string, j: number) => {
+                  return (
+                    <Col
+                      draw={j !== 0}
+                      last={i !== board.position.length - 1}
+                      key={j}
+                    >
+                      {c}
+                    </Col>
+                  );
+                })}
+              </Row>
+            );
+          })}
         </Board>
       )}
     </Container>
@@ -30,16 +58,17 @@ export default Game;
 const Container = styled.div`
   display: flex;
   box-sizing: border-box;
-  flex-direction: column;
   min-height: 100%;
   padding: 20px;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Board = styled.div`
   border-radius: 12px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   background-color: white;
+  width: 50%;
 `;
 
 const Row = styled.div`
@@ -48,8 +77,13 @@ const Row = styled.div`
   justify-content: center;
 `;
 
-const Col = styled.div`
-  height: 90px;
-  width: 90px;
-  background: red;
+const Col = styled.div<IProps>`
+  flex: 1;
+  height: 10vh;
+  border-left: ${(props) => props.draw && "1px solid black"};
+  border-bottom: ${(props) => props.last && "1px solid black"};
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 `;

@@ -1,5 +1,6 @@
 {
   "CREATE_PLAYER": "/player/",
   "GET_PLAYERS": "/players/",
+
   "NEW_GAME": "/game/"
 }
