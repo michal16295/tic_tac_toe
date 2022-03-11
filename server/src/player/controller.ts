@@ -1,15 +1,23 @@
 import { Request, Response } from "express";
 import { Player, Login } from "./model";
-import userServices from "./service";
+import gameServices from "../game/service";
 
 const createUser = (req: Request, res: Response) => {
-  const data = req.body;
-  let response = userServices.instance.addPlayer(data);
-  res.status(response.status).send(response.data);
+  try {
+    res.json({ id: gameServices.instance.addPlayer(req.body) });
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
 };
+
 const getUsers = (req: Request, res: Response) => {
-  let response = userServices.instance.getPlayers();
-  res.status(response.status).send(response.data);
+  try {
+    res.json({ id: gameServices.instance.getPlayers() });
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
 };
 
 export default { createUser, getUsers };
