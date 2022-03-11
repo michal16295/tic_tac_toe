@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ThemeProvider } from "styled-components";
 
-function App() {
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+import OnBoarding from "./screens/OnBoarding";
+import routes from "./routes.json";
+import "./App.css";
+
+const App = () => {
+  const publicRoutes = [
+    <Route
+      key="OnBoarding"
+      path={routes.ON_BOARDING}
+      element={<OnBoarding />}
+    />,
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary>
+      <Router>
+        <Routes>{publicRoutes}</Routes>
+      </Router>
+    </ErrorBoundary>
   );
-}
+};
 
 export default App;
