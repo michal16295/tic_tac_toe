@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import usePlayer from "../context/Player.context";
 import useGame from "../context/Game.context";
+import Players from "../components/Player/Players";
 
 import routes from "../routes.json";
 
@@ -13,7 +14,7 @@ interface IProps {
 
 const Game = () => {
   const { player, getCurrentPlayerData } = usePlayer();
-  const { newGame, loading, board } = useGame();
+  const { newGame, userMove, loading, board } = useGame();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,35 +24,43 @@ const Game = () => {
     } else {
       navigate(routes.ON_BOARDING);
     }
-  }, []);
+  }, [player?.id]);
+
+  const handleStep = (row: number, col: number): void => {
+    if (player) userMove(player?.id, row, col);
+  };
 
   return (
     <Container>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <Wrapper>
-          <div>Computer: 0 | {player?.name}: 100</div>
-          <Board>
-            {board?.position?.map((p: string[], i: number) => {
-              return (
-                <Row key={i}>
-                  {p.map((c: string, j: number) => {
-                    return (
-                      <Col
-                        draw={j !== 0}
-                        last={i !== board.position.length - 1}
-                        key={j}
-                      >
-                        {c}
-                      </Col>
-                    );
-                  })}
-                </Row>
-              );
-            })}
-          </Board>
-        </Wrapper>
+        <Row>
+          <Wrapper>
+            <div>Computer: 0 | {player?.name}: 100</div>
+            <Board>
+              {board?.map((p: string[], i: number) => {
+                return (
+                  <Row key={i}>
+                    {p.map((c: string, j: number) => {
+                      return (
+                        <Col
+                          draw={j !== 0}
+                          last={i !== board.length - 1}
+                          key={j}
+                          onClick={() => handleStep(i, j)}
+                        >
+                          {c}
+                        </Col>
+                      );
+                    })}
+                  </Row>
+                );
+              })}
+            </Board>
+          </Wrapper>
+          <Players />
+        </Row>
       )}
     </Container>
   );
@@ -63,7 +72,7 @@ const Container = styled.div`
   display: flex;
   box-sizing: border-box;
   min-height: 100%;
-  padding: 20px;
+  padding: 30px;
   align-items: center;
   justify-content: center;
 `;
@@ -71,22 +80,23 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: red;
+  width: 50%;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 const Board = styled.div`
   border-radius: 12px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   background-color: white;
-  width: 50%;
-  margin: 0 auto;
+  margin: 30px auto;
+  width: 70%;
 `;
 
 const Row = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  width: 100%;
 `;
 
 const Col = styled.div<IProps>`

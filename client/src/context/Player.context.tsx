@@ -40,12 +40,11 @@ export const PlayerProvider = ({
       .finally(() => setLoading(false));
   };
 
-  const getCurrentPlayerData = (id: number) => {
+  const getCurrentPlayerData = (id: string) => {
     setLoading(true);
     playerApi
       .getPlayer(id)
       .then((res) => {
-        console.log(res);
         setPlayer(res);
       })
       .catch((newError) => setError(newError))

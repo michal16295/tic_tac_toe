@@ -3,7 +3,3 @@ export interface Player {
   id?: string;
   score?: number;
 }
-
-export interface Login {
-  id: string;
-}

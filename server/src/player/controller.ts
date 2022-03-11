@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Player, Login } from "./model";
 import gameServices from "../game/service";
 
 const createUser = (req: Request, res: Response) => {

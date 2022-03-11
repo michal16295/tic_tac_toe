@@ -7,6 +7,6 @@ const express_1 = __importDefault(require("express"));
 const controller_1 = __importDefault(require("./controller"));
 const router = express_1.default.Router();
 router.post("/", controller_1.default.newGame);
-router.get("/", controller_1.default.step);
+router.put("/", controller_1.default.step);
 exports.default = router;
 //# sourceMappingURL=routes.js.map

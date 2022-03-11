@@ -92,10 +92,9 @@ class GameService {
 
     board.position[compStep[0]][compStep[1]] = "O";
 
-    if (this.checkWiner(board, "O"))
-      return { i: compStep[0], j: compStep[1], winner: Winner.computer };
+    if (this.checkWiner(board, "O")) return { board, winner: Winner.computer };
 
-    return { i: compStep[0], j: compStep[1], winner: Winner.none };
+    return { board, winner: Winner.none };
   }
 }
 

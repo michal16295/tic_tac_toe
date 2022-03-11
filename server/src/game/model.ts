@@ -20,7 +20,6 @@ export enum Winner {
 }
 
 export interface StepResponse {
-  i?: number;
-  j?: number;
+  board?: Board;
   winner: Winner;
 }

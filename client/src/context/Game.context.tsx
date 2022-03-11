@@ -1,7 +1,13 @@
-import React, { createContext, ReactNode, useState, useContext } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useState,
+  useContext,
+  useEffect,
+} from "react";
 
 import * as gameApi from "../apis/game";
-import { IBoard, GameContextType } from "../types/game";
+import { GameContextType } from "../types/game";
 
 const GameContext = createContext<GameContextType>({} as GameContextType);
 
@@ -10,23 +16,49 @@ export const GameProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  const [board, setBoard] = useState<IBoard>();
-  const [error, setError] = useState<string>();
+  const [board, setBoard] = useState<string[][]>();
+  const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const newGame = (id: number) => {
-    setLoading(true);
-    gameApi
-      .newGame(id)
-      .then((res) => {
-        setBoard(res);
-      })
-      .catch((newError) => setError(newError))
-      .finally(() => setLoading(false));
+  const newGame = async (id: string) => {
+    try {
+      setLoading(true);
+      const res = await gameApi.newGame(id);
+      setBoard(res.position);
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+    }
+  };
+
+  const userMove = async (id: string, i: number, j: number) => {
+    setMove(i, j);
+    setTimeout(() => {
+      sendMove(id, i, j);
+    }, 500);
+  };
+
+  const setMove = (i: number, j: number) => {
+    let arr: string[][] = [];
+    if (board) {
+      arr = [...board];
+      if (arr[i][j] !== "") return;
+      arr[i][j] = "X";
+      setBoard(arr);
+    }
+  };
+
+  const sendMove = async (id: string, i: number, j: number) => {
+    try {
+      const res = await gameApi.makeMove({ id, i, j });
+      setBoard(res.board.position);
+    } catch (error) {
+      setError(error);
+    }
   };
 
   return (
-    <GameContext.Provider value={{ newGame, board, loading, error }}>
+    <GameContext.Provider value={{ newGame, userMove, board, loading, error }}>
       {children}
     </GameContext.Provider>
   );

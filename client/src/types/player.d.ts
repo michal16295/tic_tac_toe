@@ -1,6 +1,6 @@
 export interface Player {
   name: string;
-  id: number;
+  id: string;
   score?: number;
 }
 
@@ -11,5 +11,5 @@ export interface PlayerContextType {
   error?: string;
   createPlayer: (name: string) => void;
   getPlayers: () => void;
-  getCurrentPlayerData: (id: number) => void;
+  getCurrentPlayerData: (id: string) => void;
 }

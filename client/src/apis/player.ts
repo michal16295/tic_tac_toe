@@ -22,7 +22,7 @@ export const getPlayers = async (): Promise<any> => {
   }
 };
 
-export const getPlayer = async (id: number): Promise<any> => {
+export const getPlayer = async (id: string): Promise<any> => {
   try {
     const res = await httpService.get(`${routes.GET_PLAYER_DATA}/${id}`);
     return res.data;

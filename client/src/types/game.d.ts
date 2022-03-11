@@ -1,11 +1,7 @@
 export interface StepRequest {
-  id: number;
+  id: string;
   i: number;
   j: number;
-}
-
-export interface IBoard {
-  position: Array<any>;
 }
 
 export enum Winner {
@@ -16,8 +12,7 @@ export enum Winner {
 }
 
 export interface StepResponse {
-  i?: number;
-  j?: number;
+  board: IBoard | undefined;
   winner: Winner;
 }
 
@@ -25,5 +20,6 @@ export interface GameContextType {
   board: IBoard | undefined;
   loading: boolean;
   error?: string;
-  newGame: (id: number) => void;
+  newGame: (id: string) => void;
+  userMove: (id: string, col: number, row: number) => void;
 }

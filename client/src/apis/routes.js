@@ -4,4 +4,5 @@ export default {
   GET_PLAYERS: "/player/",
 
   NEW_GAME: "/game/",
+  MAKE_MOVE: "/game/",
 };

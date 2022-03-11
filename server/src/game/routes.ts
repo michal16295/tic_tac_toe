@@ -4,6 +4,6 @@ import controller from "./controller";
 const router = express.Router();
 
 router.post("/", controller.newGame);
-router.get("/", controller.step);
+router.put("/", controller.step);
 
 export default router;
