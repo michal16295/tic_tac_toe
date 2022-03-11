@@ -12,19 +12,15 @@ const Players = () => {
   return (
     <Container>
       <h3>Players</h3>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          {players.map((player) => {
-            return (
-              <div key={player.id}>
-                Player: {player.name} | Score: {player.score}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <div>
+        {players.map((player) => {
+          return (
+            <div key={player.id}>
+              Player: {player.name} | Score: {player.score}
+            </div>
+          );
+        })}
+      </div>
     </Container>
   );
 };

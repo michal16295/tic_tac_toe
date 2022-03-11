@@ -20,12 +20,15 @@ export const GameProvider = ({
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [isUserMove, setIsUserMove] = useState<boolean>(true);
+  const [winner, setWinner] = useState<boolean | null>(null);
 
   const newGame = async (id: string) => {
     try {
       setLoading(true);
       const res = await gameApi.newGame(id);
       setBoard(res.position);
+      setIsUserMove(true);
+      setWinner(null);
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -53,8 +56,18 @@ export const GameProvider = ({
   const sendMove = async (id: string, i: number, j: number) => {
     try {
       const res = await gameApi.makeMove({ id, i, j });
-      setBoard(res.board.position);
-      setIsUserMove(true);
+      switch (res.winner) {
+        case 1:
+          setWinner(true);
+          break;
+        case 0:
+          setIsUserMove(true);
+          setBoard(res.board.position);
+          break;
+        default:
+          setWinner(false);
+          setBoard(res.board.position);
+      }
     } catch (error) {
       setError(error);
     }
@@ -62,7 +75,7 @@ export const GameProvider = ({
 
   return (
     <GameContext.Provider
-      value={{ newGame, userMove, board, loading, error, isUserMove }}
+      value={{ newGame, userMove, board, loading, error, isUserMove, winner }}
     >
       {children}
     </GameContext.Provider>

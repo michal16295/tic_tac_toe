@@ -59,7 +59,7 @@ class GameService {
   }
 
   getPlayers(): Player[] {
-    return this._players;
+    return this._players.sort((a, b) => a.score - b.score);
   }
 
   getPlayer(id: string): Player {

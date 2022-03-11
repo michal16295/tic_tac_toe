@@ -19,6 +19,7 @@ export interface StepResponse {
 export interface GameContextType {
   board: IBoard | undefined;
   isUserMove: boolean;
+  winner: boolean | null;
   loading: boolean;
   error?: string;
   newGame: (id: string) => void;
