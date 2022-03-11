@@ -1,5 +1,5 @@
 import express from "express";
-import { configure } from "./startup/middlewares";
+import { configure } from "./start/middlewares";
 
 const app = express();
 const port = 3000;

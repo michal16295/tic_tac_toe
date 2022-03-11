@@ -7,6 +7,7 @@ import {
 class PlayerService {
   private constructor() {}
   private static _instance: PlayerService;
+
   static get instance(): PlayerService {
     if (!this._instance) this._instance = new PlayerService();
 
@@ -15,14 +16,15 @@ class PlayerService {
 
   private _players: Player[] = [];
 
-  addPlayer(player: Player): object {
+  addPlayer(player: Player) {
     try {
       if ((player?.name || "").trim() === "")
         return responseError(404, "Invalid name");
 
       const id = new Date().valueOf();
+      const data = { id };
       this._players.push({ ...player, id: id, score: 0 });
-      return responseSuccess({ id });
+      return responseSuccess(data);
     } catch (e) {
       return responseError(500, SERVER_ERROR);
     }
@@ -37,16 +39,21 @@ class PlayerService {
     }
   }
 
-  getPlayers(): object {
+  getPlayers() {
     try {
-      return responseSuccess(this._players);
+      let data = { players: this._players };
+      return responseSuccess(data);
     } catch (e) {
       return responseError(500, SERVER_ERROR);
     }
   }
 
   getPlayer(id: number): object {
-    return this._players.find((x) => x.id === id);
+    try {
+      return responseSuccess(this._players.find((x) => x.id === id));
+    } catch (error) {
+      return responseError(500, SERVER_ERROR);
+    }
   }
 }
 
