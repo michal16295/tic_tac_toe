@@ -19,6 +19,7 @@ export const GameProvider = ({
   const [board, setBoard] = useState<string[][]>();
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [isUserMove, setIsUserMove] = useState<boolean>(true);
 
   const newGame = async (id: string) => {
     try {
@@ -33,9 +34,10 @@ export const GameProvider = ({
 
   const userMove = async (id: string, i: number, j: number) => {
     setMove(i, j);
+    setIsUserMove(false);
     setTimeout(() => {
       sendMove(id, i, j);
-    }, 500);
+    }, 800);
   };
 
   const setMove = (i: number, j: number) => {
@@ -52,13 +54,16 @@ export const GameProvider = ({
     try {
       const res = await gameApi.makeMove({ id, i, j });
       setBoard(res.board.position);
+      setIsUserMove(true);
     } catch (error) {
       setError(error);
     }
   };
 
   return (
-    <GameContext.Provider value={{ newGame, userMove, board, loading, error }}>
+    <GameContext.Provider
+      value={{ newGame, userMove, board, loading, error, isUserMove }}
+    >
       {children}
     </GameContext.Provider>
   );

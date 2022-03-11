@@ -14,20 +14,25 @@ interface IProps {
 
 const Game = () => {
   const { player, getCurrentPlayerData } = usePlayer();
-  const { newGame, userMove, loading, board } = useGame();
+  const { newGame, userMove, loading, board, isUserMove } = useGame();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (player) {
       newGame(player.id);
-      getCurrentPlayerData(player.id);
     } else {
       navigate(routes.ON_BOARDING);
     }
   }, [player?.id]);
 
+  useEffect(() => {
+    if (player) {
+      getCurrentPlayerData(player.id);
+    }
+  }, []);
+
   const handleStep = (row: number, col: number): void => {
-    if (player) userMove(player?.id, row, col);
+    if (player && isUserMove) userMove(player?.id, row, col);
   };
 
   return (
@@ -37,7 +42,9 @@ const Game = () => {
       ) : (
         <Row>
           <Wrapper>
-            <div>Computer: 0 | {player?.name}: 100</div>
+            <div>
+              Computer: 0 | {player?.name}: {player?.score}
+            </div>
             <Board>
               {board?.map((p: string[], i: number) => {
                 return (
