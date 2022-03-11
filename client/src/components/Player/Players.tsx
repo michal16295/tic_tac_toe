@@ -33,8 +33,8 @@ const Container = styled.div`
   flex-direction: column;
   min-height: 100%;
   border-radius: 12px;
-  background-color: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(2, 12, 27, 0.7);
+  background-color: #112240;
   padding: 20px;
   h3 {
     text-align: center;

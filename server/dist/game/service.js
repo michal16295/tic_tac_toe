@@ -57,7 +57,7 @@ class GameService {
         this._players = this._players.filter((x) => x.id !== id);
     }
     getPlayers() {
-        return this._players.sort((a, b) => a.score - b.score);
+        return this._players.sort((a, b) => b.score - a.score);
     }
     getPlayer(id) {
         return this._players.find((x) => x.id === id);

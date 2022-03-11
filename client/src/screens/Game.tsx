@@ -38,13 +38,16 @@ const Game = () => {
       ) : (
         <Row>
           <Wrapper>
-            <div>
-              Computer: {player?.computerScore} | {player?.name}:{" "}
-              {player?.score}
-            </div>
+            <Row style={{ alignItems: "center" }}>
+              <ScoreName>{player?.name}</ScoreName>
+              <Scores>
+                {player?.score} - {player?.computerScore}
+              </Scores>
+              <ScoreName>Computer</ScoreName>
+            </Row>
             <Board board={board} handleStep={handleStep} />
-            {winner !== null && player && (
-              <button onClick={() => newGame(player?.id)}>Play again</button>
+            {player && (
+              <Button onClick={() => newGame(player?.id)}>Play again</Button>
             )}
           </Wrapper>
           <Players />
@@ -68,7 +71,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  flex: 1 0 350px;
+  margin-bottom: 20px;
   align-items: center;
   flex-wrap: wrap;
 `;
@@ -76,5 +80,30 @@ const Wrapper = styled.div`
 const Row = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  background-color: #57cbff;
+  border-radius: 7px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 5px 6px rgba(87, 203, 255, 0.16);
+`;
+
+const ScoreName = styled.div`
+  font-weight: 500;
+  text-transform: capitalize;
+`;
+
+const Scores = styled.div`
+  border-radius: 15px;
+  margin: 0 20px;
+  background-color: #ccd6f6;
+  box-shadow: 0 5px 6px rgba(87, 203, 255, 0.16);
+  padding: 4px 20px;
+  color: black;
 `;
