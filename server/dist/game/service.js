@@ -50,7 +50,7 @@ class GameService {
         if (((player === null || player === void 0 ? void 0 : player.name) || "").trim() === "")
             return undefined;
         const id = new Date().valueOf().toString();
-        this._players.push(Object.assign(Object.assign({}, player), { id: id, score: 0 }));
+        this._players.push(Object.assign(Object.assign({}, player), { id: id, score: 0, computerScore: 0 }));
         return id;
     }
     deletePlayer(id) {
@@ -83,8 +83,10 @@ class GameService {
             return { winner: model_1.Winner.tie };
         }
         board.position[compStep[0]][compStep[1]] = "O";
-        if (this.checkWiner(board, "O"))
+        if (this.checkWiner(board, "O")) {
+            this.getPlayer(step.id).computerScore += 100;
             return { board, winner: model_1.Winner.computer };
+        }
         return { board, winner: model_1.Winner.none };
     }
 }

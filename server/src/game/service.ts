@@ -50,7 +50,7 @@ class GameService {
     if ((player?.name || "").trim() === "") return undefined;
 
     const id = new Date().valueOf().toString();
-    this._players.push({ ...player, id: id, score: 0 });
+    this._players.push({ ...player, id: id, score: 0, computerScore: 0 });
     return id;
   }
 
@@ -92,7 +92,10 @@ class GameService {
 
     board.position[compStep[0]][compStep[1]] = "O";
 
-    if (this.checkWiner(board, "O")) return { board, winner: Winner.computer };
+    if (this.checkWiner(board, "O")) {
+      this.getPlayer(step.id).computerScore += 100;
+      return { board, winner: Winner.computer };
+    }
 
     return { board, winner: Winner.none };
   }

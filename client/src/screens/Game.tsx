@@ -39,7 +39,8 @@ const Game = () => {
         <Row>
           <Wrapper>
             <div>
-              Computer: 0 | {player?.name}: {player?.score}
+              Computer: {player?.computerScore} | {player?.name}:{" "}
+              {player?.score}
             </div>
             <Board board={board} handleStep={handleStep} />
             {winner !== null && player && (
