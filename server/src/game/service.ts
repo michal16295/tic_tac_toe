@@ -77,6 +77,8 @@ class GameService {
     if (!this._boards.has(step.id)) return undefined;
 
     const board = this._boards.get(step.id);
+    if (board.position[step.i][step.j] !== "") return undefined;
+
     board.position[step.i][step.j] = "X";
 
     if (this.checkWiner(board, "X")) {

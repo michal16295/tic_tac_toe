@@ -56,17 +56,20 @@ export const GameProvider = ({
   const sendMove = async (id: string, i: number, j: number) => {
     try {
       const res = await gameApi.makeMove({ id, i, j });
-      switch (res.winner) {
-        case 1:
-          setWinner(true);
-          break;
-        case 0:
-          setIsUserMove(true);
-          setBoard(res.board.position);
-          break;
-        default:
-          setWinner(false);
-          setBoard(res.board.position);
+      if (!res || res === "") setIsUserMove(true);
+      else {
+        switch (res.winner) {
+          case 1:
+            setWinner(true);
+            break;
+          case 0:
+            setIsUserMove(true);
+            setBoard(res.board.position);
+            break;
+          default:
+            setWinner(false);
+            setBoard(res.board.position);
+        }
       }
     } catch (error) {
       setError(error);

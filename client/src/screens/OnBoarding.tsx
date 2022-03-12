@@ -7,8 +7,7 @@ const OnBoarding = () => {
   const [name, setName] = useState<string>("");
   return (
     <Container>
-      <Row></Row>
-
+      <h1>Tic Tac Toe</h1>
       <Input
         placeholder="Enter your nickname"
         onChange={(e: any) => setName(e.target.value)}
@@ -27,6 +26,14 @@ const Container = styled.div`
   min-height: 100%;
   padding: 20px;
   justify-content: space-around;
+  text-align: center;
+
+  h1 {
+    color: #57cbff;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 3px;
+  }
 `;
 
 const Row = styled.div`
@@ -46,16 +53,18 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 40%;
-  font-family: "Poppins";
-  font-size: 1rem;
-  margin: 0 auto;
-  border-radius: 15px;
-  outline: none;
-  border: none;
-  padding: 10px;
-  max-width: 200px;
-  background-color: white;
-  box-shadow: 0 5px 20px 8px rgba(227, 230, 234, 255);
+  text-align: center;
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+  padding: 10px 0 10px 10px;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 0.2em gray;
   cursor: pointer;
 `;
