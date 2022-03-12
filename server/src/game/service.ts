@@ -1,15 +1,17 @@
 import { Board, StepRequest, StepResponse, Winner } from "./model";
 import { Player } from "../player/model";
-
+import GameLogic from "./gameLogic";
 class GameService {
-  private constructor() {}
+  private constructor() {
+    this._gameLogic = new GameLogic();
+  }
   private static _instance: GameService;
   static get instance(): GameService {
     if (!this._instance) this._instance = new GameService();
 
     return this._instance;
   }
-
+  private _gameLogic: GameLogic;
   private _players: Player[] = [];
   private _boards: Map<string, Board> = new Map();
 
@@ -76,26 +78,32 @@ class GameService {
   stepProc(step: StepRequest): StepResponse {
     if (!this._boards.has(step.id)) return undefined;
 
+    const player = this.getPlayer(step.id);
+
     const board = this._boards.get(step.id);
     if (board.position[step.i][step.j] !== "") return undefined;
 
     board.position[step.i][step.j] = "X";
 
     if (this.checkWiner(board, "X")) {
-      this.getPlayer(step.id).score += 100;
+      player.score += 100;
       return { winner: Winner.player };
     }
 
-    const compStep = this.getRandomStep(board);
+    const compStep =
+      player.level === 0
+        ? this.getRandomStep(board)
+        : this._gameLogic.getStep(board.position, player.level);
+
     if (!compStep?.length) {
-      this.getPlayer(step.id).score += 10;
+      player.score += 10;
       return { winner: Winner.tie };
     }
 
     board.position[compStep[0]][compStep[1]] = "O";
 
     if (this.checkWiner(board, "O")) {
-      this.getPlayer(step.id).computerScore += 100;
+      player.computerScore += 100;
       return { board, winner: Winner.computer };
     }
 

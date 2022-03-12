@@ -3,4 +3,5 @@ export interface Player {
   id?: string;
   score?: number;
   computerScore?: number;
+  level?: number;
 }

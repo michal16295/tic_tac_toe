@@ -1,10 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_1 = require("./model");
+const gameLogic_1 = __importDefault(require("./gameLogic"));
 class GameService {
     constructor() {
         this._players = [];
         this._boards = new Map();
+        this._gameLogic = new gameLogic_1.default();
     }
     static get instance() {
         if (!this._instance)
@@ -71,22 +76,25 @@ class GameService {
     stepProc(step) {
         if (!this._boards.has(step.id))
             return undefined;
+        const player = this.getPlayer(step.id);
         const board = this._boards.get(step.id);
         if (board.position[step.i][step.j] !== "")
             return undefined;
         board.position[step.i][step.j] = "X";
         if (this.checkWiner(board, "X")) {
-            this.getPlayer(step.id).score += 100;
+            player.score += 100;
             return { winner: model_1.Winner.player };
         }
-        const compStep = this.getRandomStep(board);
+        const compStep = player.level === 0
+            ? this.getRandomStep(board)
+            : this._gameLogic.getStep(board.position, player.level);
         if (!(compStep === null || compStep === void 0 ? void 0 : compStep.length)) {
-            this.getPlayer(step.id).score += 10;
+            player.score += 10;
             return { winner: model_1.Winner.tie };
         }
         board.position[compStep[0]][compStep[1]] = "O";
         if (this.checkWiner(board, "O")) {
-            this.getPlayer(step.id).computerScore += 100;
+            player.computerScore += 100;
             return { board, winner: model_1.Winner.computer };
         }
         return { board, winner: model_1.Winner.none };

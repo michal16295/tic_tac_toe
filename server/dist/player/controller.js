@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const service_1 = __importDefault(require("../game/service"));
 const createUser = (req, res) => {
     try {
-        console.log(`Creating new player ${req.body.name}`);
+        console.log(`Creating new player ${req.body.name} level: ${req.body.level}`);
         res.json({ id: service_1.default.instance.addPlayer(req.body) });
     }
     catch (e) {

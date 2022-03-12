@@ -36,10 +36,6 @@ const Game = () => {
     }
   }, [winner]);
 
-  useEffect(() => {
-    console.log(showPopup);
-  }, [showPopup]);
-
   const handleStep = (row: number, col: number): void => {
     if (player && isUserMove) userMove(player?.id, row, col);
   };

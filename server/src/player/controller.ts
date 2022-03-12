@@ -3,7 +3,9 @@ import gameServices from "../game/service";
 
 const createUser = (req: Request, res: Response) => {
   try {
-    console.log(`Creating new player ${req.body.name}`);
+    console.log(
+      `Creating new player ${req.body.name} level: ${req.body.level}`
+    );
     res.json({ id: gameServices.instance.addPlayer(req.body) });
   } catch (e) {
     console.log(e);

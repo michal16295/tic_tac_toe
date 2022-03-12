@@ -3,6 +3,7 @@ export interface Player {
   id: string;
   score?: number;
   computerScore?: number;
+  level?: number;
 }
 
 export interface PlayerContextType {
@@ -10,7 +11,7 @@ export interface PlayerContextType {
   players: Array<Player>;
   loading: boolean;
   error?: string;
-  createPlayer: (name: string) => void;
+  createPlayer: (name: string, level: number) => void;
   getPlayers: () => void;
   getCurrentPlayerData: (id: string) => void;
 }

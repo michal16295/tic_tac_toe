@@ -17,10 +17,10 @@ export const PlayerProvider = ({
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const createPlayer = (name: string) => {
+  const createPlayer = (name: string, level: number) => {
     setLoading(true);
     playerApi
-      .createPlayer(name)
+      .createPlayer(name, level)
       .then((newUser) => {
         setPlayer(newUser);
         navigate(routes.GAME);

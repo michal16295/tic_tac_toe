@@ -3,10 +3,11 @@ import httpService from "./httpService";
 import routes from "./routes";
 
 export const createPlayer = async (
-  name: string
+  name: string,
+  level: number
 ): Promise<Player | undefined> => {
   try {
-    const res = await httpService.post(routes.CREATE_PLAYER, { name });
+    const res = await httpService.post(routes.CREATE_PLAYER, { name, level });
     return res.data;
   } catch (error) {
     console.log(error);
