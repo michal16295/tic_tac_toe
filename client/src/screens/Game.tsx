@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { IoIosArrowBack } from "react-icons/io";
+
 import usePlayer from "../context/Player.context";
 import useGame from "../context/Game.context";
 import Players from "../components/Player/Players";
 import Board from "../components/Game/Board";
 import Popup from "../components/Game/Popup";
-import difficultyArr from "../constants/difficulty";
 import LevelList from "../components/Game/LevelList";
 
 import routes from "../routes.json";
@@ -59,6 +60,9 @@ const Game = () => {
 
   return (
     <Container onClick={handleReset}>
+      <BackBtn onClick={() => navigate(routes.ON_BOARDING)}>
+        <IoIosArrowBack size={30} />
+      </BackBtn>
       {loading ? (
         <div>Loading...</div>
       ) : (
@@ -85,6 +89,7 @@ const Game = () => {
                 <ScoreName draw={!isUserMove}>AI</ScoreName>
               </Flex>
               <Board board={board} handleStep={handleStep} />
+              {showLevelArr && <LevelList onPress={handleLevel} />}
               {player && (
                 <div>
                   <Button onClick={() => newGame(player?.id)}>New game</Button>
@@ -93,7 +98,6 @@ const Game = () => {
                   </Button>
                 </div>
               )}
-              {showLevelArr && <LevelList onPress={handleLevel} />}
             </Wrapper>
             <Players />
           </Row>
@@ -113,6 +117,22 @@ const Container = styled.div`
   padding: 30px;
   align-items: center;
   justify-content: center;
+`;
+
+const BackBtn = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #112240;
+
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`

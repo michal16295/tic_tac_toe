@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { fadeInLeftBig } from "react-animations";
 
@@ -34,11 +33,11 @@ const Container = styled.div<IProps>`
   box-sizing: border-box;
   min-height: 150px;
   padding: 20px 30px;
-  background-color: rgba(0, 0, 0, 0.6);
-  animation: 1s ${bounceAnimation};
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: 0.8s ${bounceAnimation};
   text-align: center;
   color: white;
-  bottom: 50%;
+  bottom: 60%;
 
   h2 {
     font-size: clamp(3rem, 8vw, 4rem);

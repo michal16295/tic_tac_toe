@@ -46,7 +46,7 @@ const Container = styled.div`
   border-radius: 12px;
   box-shadow: 0 3px 6px rgba(2, 12, 27, 0.7);
   background-color: #112240;
-  margin: 30px auto;
+  margin: 20px auto;
   width: 100%;
   max-width: 720px;
 `;

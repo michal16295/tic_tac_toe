@@ -54,6 +54,7 @@ export default OnBoarding;
 
 const Container = styled.div`
   height: 100%;
+  padding: 0 20px;
   display: flex;
 `;
 

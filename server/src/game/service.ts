@@ -15,7 +15,7 @@ class GameService {
   private _players: Player[] = [];
   private _boards: Map<string, Board> = new Map();
 
-  private checkWiner(board: Board, fig: "X" | "O"): boolean {
+  private checkWinner(board: Board, fig: "X" | "O"): boolean {
     const arr = [0, 0, 0];
     let sum0 = 0;
     let sum1 = 0;
@@ -61,7 +61,7 @@ class GameService {
   }
 
   getPlayers(): Player[] {
-    return this._players.sort((a, b) => b.score - a.score);
+    return this._players.sort((a, b) => b.score - a.score).slice(0, 10);
   }
 
   getPlayer(id: string): Player {
@@ -91,7 +91,7 @@ class GameService {
 
     board.position[step.i][step.j] = "X";
 
-    if (this.checkWiner(board, "X")) {
+    if (this.checkWinner(board, "X")) {
       player.score += 100;
       return { winner: Winner.player };
     }
@@ -109,7 +109,7 @@ class GameService {
 
     board.position[compStep[0]][compStep[1]] = "O";
 
-    if (this.checkWiner(board, "O")) {
+    if (this.checkWinner(board, "O")) {
       player.computerScore += 100;
       return { board, winner: Winner.computer };
     }

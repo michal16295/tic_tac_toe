@@ -68,6 +68,7 @@ export const GameProvider = ({
             break;
           case 2:
             setWinner(false);
+            setBoard(res.board.position);
             break;
           default:
             setWinner(null);

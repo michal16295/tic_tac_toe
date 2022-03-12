@@ -16,7 +16,7 @@ class GameService {
             this._instance = new GameService();
         return this._instance;
     }
-    checkWiner(board, fig) {
+    checkWinner(board, fig) {
         const arr = [0, 0, 0];
         let sum0 = 0;
         let sum1 = 0;
@@ -62,7 +62,7 @@ class GameService {
         this._players = this._players.filter((x) => x.id !== id);
     }
     getPlayers() {
-        return this._players.sort((a, b) => b.score - a.score);
+        return this._players.sort((a, b) => b.score - a.score).slice(0, 10);
     }
     getPlayer(id) {
         return this._players.find((x) => x.id === id);
@@ -86,7 +86,7 @@ class GameService {
         if (board.position[step.i][step.j] !== "")
             return undefined;
         board.position[step.i][step.j] = "X";
-        if (this.checkWiner(board, "X")) {
+        if (this.checkWinner(board, "X")) {
             player.score += 100;
             return { winner: model_1.Winner.player };
         }
@@ -99,7 +99,7 @@ class GameService {
             return { winner: model_1.Winner.tie };
         }
         board.position[compStep[0]][compStep[1]] = "O";
-        if (this.checkWiner(board, "O")) {
+        if (this.checkWinner(board, "O")) {
             player.computerScore += 100;
             return { board, winner: model_1.Winner.computer };
         }
