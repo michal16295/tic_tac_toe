@@ -34,15 +34,17 @@ const Container = styled.div<IProps>`
   box-sizing: border-box;
   min-height: 150px;
   padding: 20px 30px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   animation: 1s ${bounceAnimation};
   text-align: center;
+  color: white;
+  top: 10px;
 
   h1 {
     font-size: clamp(3rem, 8vw, 4rem);
   }
 
   h3 {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    font-size: clamp(2rem, 8vw, 3.5rem);
   }
 `;
