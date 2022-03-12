@@ -1,7 +1,7 @@
 # Tic Tac Toe
 
-This repository contains a smart and responsive Tic Tac Toe game, which can be played using mobile or computer.
-In the current version the user can only play against the computer.
+This repository contains a smart and responsive Tic Tac Toe game, which can be played using mobile or computer.<br />
+In the current version the user can only play against the computer.<br />
 The game is a "smart game" and is based on the "MinMax" algorithm.
 
 ## Running the game
@@ -9,13 +9,13 @@ The game is a "smart game" and is based on the "MinMax" algorithm.
 * git clone https://github.com/michal16295/tic_tac_toe.git
 
 ## Client:
-#### `npm i`
-#### `npm start`
+`npm i`<br />
+`npm start`
 
 ## Server:
-#### `npm i`
-#### `npx tsc`  
-#### `node dist/app.js` 
+`npm i`<br />
+`npx tsc`<br />
+`node dist/app.js` 
 
 
 ![mobile (7)](https://user-images.githubusercontent.com/44338182/158026248-00899452-1265-46d5-98fd-20c07eb517e5.png)
@@ -33,8 +33,8 @@ The game is a "smart game" and is based on the "MinMax" algorithm.
 
 # General Architecture
 
-All of the game logic was calculated on the server.
-The client sends to the server his step (i,j), and the server returns a whole board with his step. The reason for this implementation is to prevent cheating.
+All of the game logic was calculated on the server<br />.
+The client sends to the server his step (i,j), and the server returns a whole board with his step.<br /> The reason for this implementation is to prevent cheating.
 
 ## Client side:
 All of the client's logic is separated from the ui, and implemented using Context.
@@ -55,7 +55,7 @@ Holds all of the Api's request related to each Model.
 * Player
 
 ## Server Side:
-Developed using Singleton pattern. 
+Developed using Singleton pattern.<br /> 
 Separated by models: Player and Game, each model contains the following:
 * Model - inteface
 * Controller - middlware between the service and the route.
