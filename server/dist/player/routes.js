@@ -9,5 +9,6 @@ const router = express_1.default.Router();
 router.post("/", controller_1.default.createUser);
 router.get("/", controller_1.default.getUsers);
 router.get("/:id", controller_1.default.getUser);
+router.put("/:id", controller_1.default.changeDifficulty);
 exports.default = router;
 //# sourceMappingURL=routes.js.map

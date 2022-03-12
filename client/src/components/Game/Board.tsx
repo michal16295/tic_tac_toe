@@ -66,7 +66,7 @@ const Col = styled.div<IProps>`
   justify-content: center;
   align-items: center;
   display: flex;
-
+  cursor: pointer;
   &:hover {
     background-color: ${(props) => props.empty && "#020c1b"};
   }

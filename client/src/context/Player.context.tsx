@@ -13,7 +13,7 @@ export const PlayerProvider = ({
 }): JSX.Element => {
   const [player, setPlayer] = useState<Player>();
   const [players, setPlayers] = useState<Array<Player>>([]);
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -51,12 +51,24 @@ export const PlayerProvider = ({
       .finally(() => setLoading(false));
   };
 
+  const changeDifficulty = async (id: string, level: number) => {
+    try {
+      setLoading(true);
+      let res = await playerApi.changeDifficulty(id, level);
+      setPlayer(res);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   return (
     <PlayerContext.Provider
       value={{
         createPlayer,
         getPlayers,
         getCurrentPlayerData,
+        changeDifficulty,
         player,
         players,
         loading,

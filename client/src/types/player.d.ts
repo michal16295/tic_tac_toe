@@ -14,4 +14,5 @@ export interface PlayerContextType {
   createPlayer: (name: string, level: number) => void;
   getPlayers: () => void;
   getCurrentPlayerData: (id: string) => void;
+  changeDifficulty: (id: string, level: number) => void;
 }

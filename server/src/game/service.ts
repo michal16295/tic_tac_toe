@@ -75,6 +75,12 @@ class GameService {
     return this._boards.get(id);
   }
 
+  changeDifficulty(id: string, level: number): Player {
+    let player = this.getPlayer(id);
+    player.level = level;
+    return player;
+  }
+
   stepProc(step: StepRequest): StepResponse {
     if (!this._boards.has(step.id)) return undefined;
 
@@ -97,6 +103,7 @@ class GameService {
 
     if (!compStep?.length) {
       player.score += 10;
+      player.computerScore += 10;
       return { winner: Winner.tie };
     }
 

@@ -34,5 +34,17 @@ const getUser = (req, res) => {
         res.status(500);
     }
 };
-exports.default = { createUser, getUsers, getUser };
+const changeDifficulty = (req, res) => {
+    try {
+        console.log(`Change difficulty user id: ${req.params.id}`);
+        const { id } = req.params;
+        const { level } = req.body;
+        res.json(service_1.default.instance.changeDifficulty(id, level));
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500);
+    }
+};
+exports.default = { createUser, getUsers, getUser, changeDifficulty };
 //# sourceMappingURL=controller.js.map

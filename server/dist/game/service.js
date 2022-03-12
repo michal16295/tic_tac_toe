@@ -73,6 +73,11 @@ class GameService {
         this._boards.set(id, new model_1.Board());
         return this._boards.get(id);
     }
+    changeDifficulty(id, level) {
+        let player = this.getPlayer(id);
+        player.level = level;
+        return player;
+    }
     stepProc(step) {
         if (!this._boards.has(step.id))
             return undefined;

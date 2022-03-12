@@ -20,7 +20,7 @@ export const GameProvider = ({
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
   const [isUserMove, setIsUserMove] = useState<boolean>(true);
-  const [winner, setWinner] = useState<boolean | null>(null);
+  const [winner, setWinner] = useState<boolean | null | undefined>(undefined);
 
   const newGame = async (id: string) => {
     try {
@@ -28,7 +28,7 @@ export const GameProvider = ({
       const res = await gameApi.newGame(id);
       setBoard(res.position);
       setIsUserMove(true);
-      setWinner(null);
+      setWinner(undefined);
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -59,15 +59,18 @@ export const GameProvider = ({
       if (!res || res === "") setIsUserMove(true);
       else {
         switch (res.winner) {
-          case 1:
-            setWinner(true);
-            break;
           case 0:
             setIsUserMove(true);
             setBoard(res.board.position);
             break;
-          default:
+          case 1:
+            setWinner(true);
+            break;
+          case 2:
             setWinner(false);
+            break;
+          default:
+            setWinner(null);
             setBoard(res.board.position);
         }
       }

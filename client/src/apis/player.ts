@@ -31,3 +31,17 @@ export const getPlayer = async (id: string): Promise<any> => {
     console.log(error);
   }
 };
+
+export const changeDifficulty = async (
+  id: string,
+  level: number
+): Promise<any> => {
+  try {
+    const res = await httpService.put(`${routes.CHANGE_DIFFICULTY}/${id}`, {
+      level,
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

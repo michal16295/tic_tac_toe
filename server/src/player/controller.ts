@@ -33,4 +33,16 @@ const getUser = (req: Request, res: Response) => {
   }
 };
 
-export default { createUser, getUsers, getUser };
+const changeDifficulty = (req: Request, res: Response) => {
+  try {
+    console.log(`Change difficulty user id: ${req.params.id}`);
+    const { id } = req.params;
+    const { level } = req.body;
+    res.json(gameServices.instance.changeDifficulty(id, level));
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
+};
+
+export default { createUser, getUsers, getUser, changeDifficulty };

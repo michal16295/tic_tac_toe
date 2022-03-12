@@ -138,6 +138,7 @@ const Level = styled.div`
   border-radius: 15px;
   border: 3px solid white;
   padding: 10px 20px;
+  cursor: pointer;
   font-weight: 600;
   box-shadow: 0 6px rgba(255, 255, 255, 0.8);
   &:hover {
