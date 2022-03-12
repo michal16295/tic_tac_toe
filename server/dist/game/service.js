@@ -95,6 +95,7 @@ class GameService {
             : this._gameLogic.getStep(board.position, player.level);
         if (!(compStep === null || compStep === void 0 ? void 0 : compStep.length)) {
             player.score += 10;
+            player.computerScore += 10;
             return { winner: model_1.Winner.tie };
         }
         board.position[compStep[0]][compStep[1]] = "O";

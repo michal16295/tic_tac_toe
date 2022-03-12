@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as playerApi from "../apis/player";
 import { Player, PlayerContextType } from "../types/player";
 import routes from "../routes.json";
@@ -17,38 +17,38 @@ export const PlayerProvider = ({
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const createPlayer = (name: string, level: number) => {
-    setLoading(true);
-    playerApi
-      .createPlayer(name, level)
-      .then((newUser) => {
-        setPlayer(newUser);
-        navigate(routes.GAME);
-      })
-      .catch((newError) => setError(newError))
-      .finally(() => setLoading(false));
+  const createPlayer = async (name: string, level: number) => {
+    try {
+      setLoading(true);
+      const newUser = await playerApi.createPlayer(name, level);
+      setPlayer(newUser);
+      navigate(routes.GAME);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+    }
   };
 
-  const getPlayers = () => {
-    setLoading(true);
-    playerApi
-      .getPlayers()
-      .then((res) => {
-        setPlayers(res);
-      })
-      .catch((newError) => setError(newError))
-      .finally(() => setLoading(false));
+  const getPlayers = async () => {
+    try {
+      setLoading(true);
+      const res = await playerApi.getPlayers();
+      setPlayers(res);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+    }
   };
 
-  const getCurrentPlayerData = (id: string) => {
-    setLoading(true);
-    playerApi
-      .getPlayer(id)
-      .then((res) => {
-        setPlayer(res);
-      })
-      .catch((newError) => setError(newError))
-      .finally(() => setLoading(false));
+  const getCurrentPlayerData = async (id: string) => {
+    try {
+      setLoading(true);
+      const res = await playerApi.getPlayer(id);
+      setPlayer(res);
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+    }
   };
 
   const changeDifficulty = async (id: string, level: number) => {

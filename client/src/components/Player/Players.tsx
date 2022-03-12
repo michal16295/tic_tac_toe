@@ -45,7 +45,7 @@ const Container = styled.div`
   box-shadow: 0 3px 6px rgba(2, 12, 27, 0.7);
   background-color: #112240;
   padding: 20px;
-  max-width: 400px;
+  max-width: 450px;
   h2 {
     text-align: center;
     margin-right: 10px;
