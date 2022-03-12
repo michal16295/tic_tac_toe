@@ -1,6 +1,11 @@
 import { Board, StepRequest, StepResponse, Winner } from "./model";
 import { Player } from "../player/model";
 import GameLogic from "./gameLogic";
+
+const figure = {
+  X: "X",
+  O: "O",
+};
 class GameService {
   private constructor() {
     this._gameLogic = new GameLogic();
@@ -15,7 +20,7 @@ class GameService {
   private _players: Player[] = [];
   private _boards: Map<string, Board> = new Map();
 
-  private checkWinner(board: Board, fig: "X" | "O"): boolean {
+  private checkWinner(board: Board, fig: string): boolean {
     const arr = [0, 0, 0];
     let sum0 = 0;
     let sum1 = 0;
@@ -89,9 +94,9 @@ class GameService {
     const board = this._boards.get(step.id);
     if (board.position[step.i][step.j] !== "") return undefined;
 
-    board.position[step.i][step.j] = "X";
+    board.position[step.i][step.j] = figure.X;
 
-    if (this.checkWinner(board, "X")) {
+    if (this.checkWinner(board, figure.X)) {
       player.score += 100;
       return { winner: Winner.player };
     }
@@ -107,9 +112,9 @@ class GameService {
       return { winner: Winner.tie };
     }
 
-    board.position[compStep[0]][compStep[1]] = "O";
+    board.position[compStep[0]][compStep[1]] = figure.O;
 
-    if (this.checkWinner(board, "O")) {
+    if (this.checkWinner(board, figure.O)) {
       player.computerScore += 100;
       return { board, winner: Winner.computer };
     }

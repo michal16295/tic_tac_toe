@@ -3,9 +3,13 @@ interface Step {
   j: number;
 }
 
+const figure = {
+  X: "X",
+  O: "O",
+};
 class GameLogic {
-  private _computer = "O";
-  private _player = "X";
+  private _computer = figure.O;
+  private _player = figure.X;
 
   isMovesLeft(position: string[][]) {
     for (let i = 0; i < 3; i++)
