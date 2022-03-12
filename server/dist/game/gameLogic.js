@@ -1,9 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const figure = {
+    X: "X",
+    O: "O",
+};
 class GameLogic {
     constructor() {
-        this._computer = "O";
-        this._player = "X";
+        this._computer = figure.O;
+        this._player = figure.X;
     }
     isMovesLeft(position) {
         for (let i = 0; i < 3; i++)

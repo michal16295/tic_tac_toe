@@ -1,5 +1,5 @@
 import styled, { keyframes, css } from "styled-components";
-import { slideInDown } from "react-animations";
+import { fadeInDown } from "react-animations";
 import difficultyArr from "../../constants/difficulty";
 
 interface IProps {
@@ -33,7 +33,7 @@ const LevelList = ({
 
 export default LevelList;
 
-const fadeAnimation = keyframes`${slideInDown}`;
+const fadeAnimation = keyframes`${fadeInDown}`;
 
 const List = styled.div<IProps>`
   display: flex;

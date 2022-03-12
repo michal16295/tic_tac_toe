@@ -37,7 +37,7 @@ const Container = styled.div<IProps>`
   animation: 0.8s ${bounceAnimation};
   text-align: center;
   color: white;
-  bottom: 60%;
+  bottom: 50%;
 
   h2 {
     font-size: clamp(3rem, 8vw, 4rem);

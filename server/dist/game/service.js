@@ -5,6 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_1 = require("./model");
 const gameLogic_1 = __importDefault(require("./gameLogic"));
+const figure = {
+    X: "X",
+    O: "O",
+};
 class GameService {
     constructor() {
         this._players = [];
@@ -85,8 +89,8 @@ class GameService {
         const board = this._boards.get(step.id);
         if (board.position[step.i][step.j] !== "")
             return undefined;
-        board.position[step.i][step.j] = "X";
-        if (this.checkWinner(board, "X")) {
+        board.position[step.i][step.j] = figure.X;
+        if (this.checkWinner(board, figure.X)) {
             player.score += 100;
             return { winner: model_1.Winner.player };
         }
@@ -98,8 +102,8 @@ class GameService {
             player.computerScore += 10;
             return { winner: model_1.Winner.tie };
         }
-        board.position[compStep[0]][compStep[1]] = "O";
-        if (this.checkWinner(board, "O")) {
+        board.position[compStep[0]][compStep[1]] = figure.O;
+        if (this.checkWinner(board, figure.O)) {
             player.computerScore += 100;
             return { board, winner: model_1.Winner.computer };
         }
