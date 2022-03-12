@@ -7,6 +7,7 @@ import Players from "../components/Player/Players";
 import Board from "../components/Game/Board";
 import Popup from "../components/Game/Popup";
 import difficultyArr from "../constants/difficulty";
+import LevelList from "../components/Game/LevelList";
 
 import routes from "../routes.json";
 
@@ -75,6 +76,7 @@ const Game = () => {
           />
           <Row>
             <Wrapper>
+              <h1>Tic Tac Toe</h1>
               <Flex>
                 <ScoreName draw={isUserMove}>{player?.name}</ScoreName>
                 <Scores>
@@ -91,17 +93,7 @@ const Game = () => {
                   </Button>
                 </div>
               )}
-              {showLevelArr && (
-                <LevelList>
-                  {difficultyArr.map((item) => {
-                    return (
-                      <div onClick={() => handleLevel(item.id)} key={item.id}>
-                        {item.title}
-                      </div>
-                    );
-                  })}
-                </LevelList>
-              )}
+              {showLevelArr && <LevelList onPress={handleLevel} />}
             </Wrapper>
             <Players />
           </Row>
@@ -174,28 +166,4 @@ const Scores = styled.div`
   box-shadow: 0 5px 6px rgba(87, 203, 255, 0.16);
   padding: 4px 20px;
   color: black;
-`;
-
-const LevelList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px 0;
-
-  div {
-    text-transform: uppercase;
-    background-color: #57cbff;
-    color: #112240;
-    margin: 10px 10px;
-    flex: 1 0 70px;
-    border-radius: 15px;
-    border: 3px solid white;
-    padding: 10px 20px;
-    text-align: center;
-    cursor: pointer;
-    font-weight: 600;
-    box-shadow: 0 6px rgba(255, 255, 255, 0.8);
-    &:hover {
-      box-shadow: 0 6px rgba(17, 34, 64, 1);
-    }
-  }
 `;

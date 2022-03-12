@@ -3,6 +3,7 @@ import styled from "styled-components";
 import usePlayer from "../context/Player.context";
 import { IoGameControllerOutline } from "react-icons/io5";
 import difficultyArr from "../constants/difficulty";
+import LevelList from "../components/Game/LevelList";
 
 const OnBoarding = () => {
   const { createPlayer, player } = usePlayer();
@@ -34,17 +35,7 @@ const OnBoarding = () => {
           </>
         );
       case 1:
-        return (
-          <div>
-            {difficultyArr.map((item) => {
-              return (
-                <Level onClick={() => handleLevel(item.id)} key={item.id}>
-                  {item.title}
-                </Level>
-              );
-            })}
-          </div>
-        );
+        return <LevelList direction="column" onPress={handleLevel} />;
       default:
         return <div>Error...</div>;
     }
@@ -80,13 +71,6 @@ const Inner = styled.div`
   padding: 20px;
   justify-content: space-around;
   text-align: center;
-
-  h1 {
-    color: #57cbff;
-    font-size: clamp(3rem, 8vw, 5rem);
-    -webkit-text-stroke-color: white;
-    -webkit-text-stroke-width: 2px;
-  }
 `;
 const InputDiv = styled.div`
   border-bottom: 2px solid #57cbff;
@@ -124,23 +108,6 @@ const Button = styled.button`
   box-shadow: 0 6px rgba(255, 255, 255, 0.8);
   color: #112240;
 
-  &:hover {
-    box-shadow: 0 6px rgba(17, 34, 64, 1);
-  }
-`;
-
-const Level = styled.div`
-  text-transform: uppercase;
-  background-color: #57cbff;
-  color: #112240;
-  margin: 20px auto;
-  max-width: 150px;
-  border-radius: 15px;
-  border: 3px solid white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 6px rgba(255, 255, 255, 0.8);
   &:hover {
     box-shadow: 0 6px rgba(17, 34, 64, 1);
   }

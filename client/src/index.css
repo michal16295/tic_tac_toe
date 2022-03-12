@@ -22,3 +22,10 @@ body {
   height: 100%;
   position: relative;
 }
+
+h1 {
+  color: #57cbff;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px;
+}

@@ -17,7 +17,7 @@ const Popup = ({
 }) => {
   return (
     <Container show={show} onClick={onPress}>
-      <h1>{text}</h1>
+      <h2>{text}</h2>
       <h3>Press anywhere to play again.</h3>
     </Container>
   );
@@ -38,9 +38,9 @@ const Container = styled.div<IProps>`
   animation: 1s ${bounceAnimation};
   text-align: center;
   color: white;
-  top: 10px;
+  bottom: 50%;
 
-  h1 {
+  h2 {
     font-size: clamp(3rem, 8vw, 4rem);
   }
 

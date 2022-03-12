@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import usePlayer from "../../context/Player.context";
 
 const X = "X";
 const O = "O";
@@ -8,10 +6,10 @@ const O = "O";
 const Figure = ({ figure }: { figure: string }) => {
   return (
     <div>
-      {figure.toUpperCase() === X ? (
+      {figure.toUpperCase() === O ? (
         <Circle />
       ) : (
-        <>{figure.toUpperCase() === O ? <EX>X</EX> : null}</>
+        <>{figure.toUpperCase() === X ? <EX>X</EX> : null}</>
       )}
     </div>
   );
